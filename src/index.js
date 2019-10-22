@@ -12,4 +12,19 @@ $(document).ready(() => {
       $('.word-count').html(`<h3>Word: ${word} Count: ${count}</h3>`)
     }
   })
+  $('button').click(function() {
+    let input = $('.text-submission > textarea').val()
+    let words = input.split(' ')
+    $(words).each(function(i, word) {
+      let data = { word: { value: word } }
+      $.ajax({
+        url: url + '/api/v1/words',
+        method: "POST",
+        data: data,
+        success: function(result){
+          console.log(result)
+        }
+      })
+    })
+  })
 })
